@@ -20,9 +20,45 @@ function Login() {
         username: username,
         password: password,
       }),
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        if (!user.error) {
+          login(user);
+          navigate("/");
+        } else {
+          setUsername("");
+          setPassword("");
+          setError(user.error);
+        }
+      });
   }
-  return;
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <label>Username: </label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />{" "}
+        <br />
+        <label>Password: </label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />{" "}
+        <br />
+        <input type="submit" />
+      </form>
+      <ul>
+        <h3>{error}</h3>
+      </ul>
+    </>
+  );
 }
 
 export default Login;
