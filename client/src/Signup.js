@@ -47,7 +47,7 @@ function Signup() {
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-        />{" "}
+        />
         <br />
         <label>Password:</label>
         <input
@@ -55,7 +55,7 @@ function Signup() {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        />{" "}
+        />
         <br />
         <label>Confirm Password:</label>
         <input
@@ -63,7 +63,7 @@ function Signup() {
           id="password_confirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
-        />{" "}
+        />
         <br />
         <input type="submit" />
       </form>

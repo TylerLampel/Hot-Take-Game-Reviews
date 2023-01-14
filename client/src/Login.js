@@ -23,16 +23,17 @@ function Login() {
     })
       .then((res) => res.json())
       .then((user) => {
-        if (!user.error) {
+        if (!user.errors) {
           login(user);
           navigate("/");
         } else {
           setUsername("");
           setPassword("");
-          setError(user.error);
+          setError(user.errors);
         }
       });
   }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -42,7 +43,7 @@ function Login() {
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-        />{" "}
+        />
         <br />
         <label>Password: </label>
         <input
@@ -50,7 +51,7 @@ function Login() {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        />{" "}
+        />
         <br />
         <input type="submit" />
       </form>

@@ -13,7 +13,7 @@ function UserProvider({ children }) {
       .then((res) => res.json())
       .then((data) => {
         setUser(data);
-        data.error ? setLoggedIn(false) : setLoggedIn(true); //loggedIn flag
+        data.errors ? setLoggedIn(false) : setLoggedIn(true); //loggedIn flag
       });
   }, []);
 
