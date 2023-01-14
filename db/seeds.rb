@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 Game.destroy_all
 
 Game.create!([{
@@ -26,3 +27,27 @@ Game.create!([{
     age_rating: "18+",
     description: "Like its predecessor, the game takes place in a realistic and modern setting. The campaign follows multinational unit Task Force 141 and Mexican Special Forces unit Los Vaqueros as they attempt to track down Iranian Quds Force major and terrorist Hassan Zyani, who is in possession of American-made ballistic missiles. The game's main playable characters are John 'Soap' MacTavish and Kyle 'Gaz' Garrick of Task Force 141. Running on a new version of the IW engine, multiplayer mode supports cross-platform multiplayer and features a free-to-play battle royale mode, Warzone 2.0, a follow-up to the original Warzone."
 }])
+
+# Review.destroy_all
+
+# Review.create!([{
+#     title: "Very Good Game",
+#     body: "I love this game!! I've been playing OSRS since 2007! Can't get enough of it!",
+#     rating: 5,
+#     user_id: 1,
+#     game_id: 1
+# },
+# {
+#     title: "Love this game",
+#     body: "Can't play it enough",
+#     rating: 5,
+#     user_id: 1,
+#     game_id: 2
+# }])
+
+# User.destroy_all
+
+# User.create!([{
+#     username: "tyler",
+#     password_digest: "123"
+# }])
