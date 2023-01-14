@@ -2,7 +2,8 @@ class ReviewsController < ApplicationController
     skip_before_action :authorize
     
     def index
-        render json: Review.all
+        reviews = Review.all
+        render json: reviews, status: :ok
     end
 
     def show
@@ -32,5 +33,4 @@ class ReviewsController < ApplicationController
     def review_params
         params.permit(:title, :body, :rating)
     end
-
 end

@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./context/user";
+import GameCard from "./GameCard";
 
 function Games() {
-  return <div>Games</div>;
+  const { games, addGame } = useContext(UserContext);
+
+  const renderedGameCards = games.map((game) => (
+    <GameCard key={game.id} game={game} />
+  ));
+  return (
+    <div>
+      Games
+      {renderedGameCards}
+    </div>
+  );
 }
 
 export default Games;

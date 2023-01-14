@@ -7,7 +7,6 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false); //add loggedIn flag
-  const [reviews, setReviews] = useState([]);
   const [games, setGames] = useState([]);
 
   useEffect(() => {
@@ -19,20 +18,10 @@ function UserProvider({ children }) {
           setLoggedIn(false);
         } else {
           setLoggedIn(true);
-          fetchReviews();
           fetchGames();
         }
       });
   }, []);
-
-  function fetchReviews() {
-    fetch("/reviews")
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
-        console.log("my reviews", data);
-      });
-  }
 
   function fetchGames() {
     fetch("/games")
@@ -40,6 +29,14 @@ function UserProvider({ children }) {
       .then((data) => {
         setGames(data);
         console.log("games", data);
+      });
+  }
+
+  function addGame(game) {
+    fetch("/games")
+      .then((res) => res.json())
+      .then((data) => {
+        setGames([...games, data]);
       });
   }
 
@@ -61,7 +58,7 @@ function UserProvider({ children }) {
   return (
     //add loggedIn to global state
     <UserContext.Provider
-      value={{ user, login, logout, signup, loggedIn, reviews }}
+      value={{ user, login, logout, signup, loggedIn, games, addGame }}
     >
       {children}
     </UserContext.Provider>

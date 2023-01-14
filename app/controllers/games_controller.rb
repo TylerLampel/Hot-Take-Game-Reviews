@@ -5,7 +5,7 @@ class GamesController < ApplicationController
 
     def index
         games = Game.all
-        render json: games, status: :ok
+        render json: games, include: :reviews, status: :ok
     end
 
     def create
