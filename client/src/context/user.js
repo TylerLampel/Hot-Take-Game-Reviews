@@ -28,12 +28,15 @@ function UserProvider({ children }) {
       .then((res) => res.json())
       .then((data) => {
         setGames(data);
-        console.log("games", data);
       });
   }
 
   function addGame(game) {
-    fetch("/games")
+    fetch("/games", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(game),
+    })
       .then((res) => res.json())
       .then((data) => {
         setGames([...games, data]);

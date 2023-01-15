@@ -3,7 +3,7 @@ import { UserContext } from "./context/user";
 import GameCard from "./GameCard";
 
 function Games() {
-  const { games, addGame } = useContext(UserContext);
+  const { games } = useContext(UserContext);
 
   const renderedGameCards = games.map((game) => (
     <GameCard key={game.id} game={game} />

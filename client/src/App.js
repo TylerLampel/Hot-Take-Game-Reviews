@@ -8,6 +8,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Games from "./Games";
 import Reviews from "./Reviews";
+import AddAGameForm from "./AddAGameForm";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/games" element={<Games />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/addgame" element={<AddAGameForm />} />
         </Routes>
       </UserProvider>
     </div>
