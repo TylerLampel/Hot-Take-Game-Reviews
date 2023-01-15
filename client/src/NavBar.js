@@ -19,6 +19,7 @@ function Navbar() {
   if (loggedIn) {
     return (
       <div>
+        <h1>Hot Takes Game Reviews</h1>
         <h3>Hello {user.username}</h3>
         <button onClick={logoutUser}>Logout</button>
         <NavLink to="/addGame">
@@ -30,6 +31,7 @@ function Navbar() {
   } else {
     return (
       <div>
+        <h1>Hot Takes Game Reviews</h1>
         <NavLink to="/login">
           <button>Login</button>
         </NavLink>

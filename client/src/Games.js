@@ -8,6 +8,7 @@ function Games() {
   const renderedGameCards = games.map((game) => (
     <GameCard key={game.id} game={game} />
   ));
+
   return (
     <div>
       Games

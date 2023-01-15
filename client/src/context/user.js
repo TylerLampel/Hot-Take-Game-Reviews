@@ -14,11 +14,11 @@ function UserProvider({ children }) {
       .then((res) => res.json())
       .then((data) => {
         setUser(data);
+        fetchGames();
         if (data.errors) {
           setLoggedIn(false);
         } else {
           setLoggedIn(true);
-          fetchGames();
         }
       });
   }, []);
@@ -27,6 +27,7 @@ function UserProvider({ children }) {
     fetch("/games")
       .then((res) => res.json())
       .then((data) => {
+        console.log("games", data);
         setGames(data);
       });
   }
@@ -41,6 +42,11 @@ function UserProvider({ children }) {
       .then((data) => {
         setGames([...games, data]);
       });
+  }
+
+  function deleteGame(id) {
+    const updatedGames = games.filter((game) => game.id !== id);
+    setGames(updatedGames);
   }
 
   function login(user) {
@@ -61,7 +67,16 @@ function UserProvider({ children }) {
   return (
     //add loggedIn to global state
     <UserContext.Provider
-      value={{ user, login, logout, signup, loggedIn, games, addGame }}
+      value={{
+        user,
+        login,
+        logout,
+        signup,
+        loggedIn,
+        games,
+        addGame,
+        deleteGame,
+      }}
     >
       {children}
     </UserContext.Provider>

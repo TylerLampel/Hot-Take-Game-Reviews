@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./context/user";
+import { useNavigate } from "react-router-dom";
 
 function AddAGameForm() {
   const [title, setTitle] = useState("");
@@ -7,6 +8,7 @@ function AddAGameForm() {
   const [ageRating, setAgeRating] = useState("");
   const [description, setDescription] = useState("");
   const { addGame } = useContext(UserContext);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,6 +18,7 @@ function AddAGameForm() {
       age_rating: ageRating,
       description: description,
     });
+    navigate("/games");
   }
   return (
     <form onSubmit={handleSubmit}>
