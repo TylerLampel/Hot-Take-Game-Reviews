@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "./context/user";
 
 function GameCard({ game }) {
@@ -19,6 +20,9 @@ function GameCard({ game }) {
       <h4>{title}</h4>
       <img src={image_url} alt={title} />
       <button onClick={handleDeleteGameClick}> Delete </button>
+      <Link to={`/games/${id}/reviews`}>
+        <button>Reviews</button>
+      </Link>
       <p>Age Rating: {age_rating}</p>
       <p>
         Description:

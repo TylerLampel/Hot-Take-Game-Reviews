@@ -15,7 +15,7 @@ class GamesController < ApplicationController
 
     def show
         game = Game.find(params[:id])
-        render json: game, status: :ok
+        render json: game, include: :reviews, status: :ok
     end
 
     def destroy

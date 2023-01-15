@@ -44,6 +44,22 @@ function UserProvider({ children }) {
       });
   }
 
+  // add a review through association
+  // use params to add the review to that game
+  //
+
+  // function addReview(review) {
+  //   fetch("/reviews", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(review),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setGames([...games, data]);
+  //     });
+  // }
+
   function deleteGame(id) {
     const updatedGames = games.filter((game) => game.id !== id);
     setGames(updatedGames);
