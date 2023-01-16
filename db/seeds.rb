@@ -7,8 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Game.destroy_all
-
 Game.create!([{
     title: "Old School RuneScape",
     image_url: "https://www.runescape.com/img/rsp777/social-share-fb.jpg?1",
@@ -27,3 +25,86 @@ Game.create!([{
     age_rating: "18+",
     description: "Like its predecessor, the game takes place in a realistic and modern setting. The campaign follows multinational unit Task Force 141 and Mexican Special Forces unit Los Vaqueros as they attempt to track down Iranian Quds Force major and terrorist Hassan Zyani, who is in possession of American-made ballistic missiles. The game's main playable characters are John 'Soap' MacTavish and Kyle 'Gaz' Garrick of Task Force 141. Running on a new version of the IW engine, multiplayer mode supports cross-platform multiplayer and features a free-to-play battle royale mode, Warzone 2.0, a follow-up to the original Warzone."
 }])
+
+User.create!([{
+    username: "tyler",
+    password_digest: "123"
+},
+{
+    username: "bob",
+    password_digest: "bob"
+},
+{
+    username: "sue",
+    password_digest: "sue"
+},
+{
+    username: "123",
+    password_digest: "123"
+}])
+
+
+Review.create!([{
+    title: "Very Good Game",
+    body: "I love this game!! I've been playing OSRS since 2007! Can't get enough of it!",
+    rating: 5,
+    user_id:1,
+    game_id: 1
+},
+{
+    title: "Love this game",
+    body: "Can't play it enough",
+    rating: 5,
+    user_id: 2,
+    game_id: 2
+},
+{
+    title: "do not recommend",
+    body: "so boring",
+    rating: 1,
+    user_id: 3,
+    game_id: 1
+},
+{
+    title: "this was okay",
+    body: "i still play this game but i am trying to git gud",
+    rating: 3,
+    user_id: 4,
+    game_id: 3
+},
+{
+    title: "Kid's game",
+    body: "Can't play anymore. Always get killed by 12 year olds.",
+    rating: 2,
+    user_id: 1,
+    game_id: 2
+},
+{
+    title: "AMAZING",
+    body: "I LOVE EVERY ITERATION OF COD.",
+    rating: 5,
+    user_id: 2,
+    game_id: 3
+},
+{
+    title: "Very Grindy Game",
+    body: "Very nostalgic, and always fun to play! Gets boring very fast.",
+    rating: 4,
+    user_id: 3,
+    game_id: 1
+},
+{
+    title: "Always enjoy playing",
+    body: "play it all the time",
+    rating: 5,
+    user_id: 4,
+    game_id: 2
+},
+{
+    title: "good enough",
+    body: "it is okay, just another COD",
+    rating: 3,
+    user_id: 1,
+    game_id: 3
+}])
+

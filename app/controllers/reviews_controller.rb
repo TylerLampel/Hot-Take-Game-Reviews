@@ -2,8 +2,13 @@ class ReviewsController < ApplicationController
     skip_before_action :authorize
     
     def index
-        reviews = Review.all
-        render json: reviews, status: :ok
+        if params[:game_id]
+            game = Game.find(params[:game_id])
+            reviews = game.reviews
+        else
+            reviews = Review.all
+        end
+        render json: reviews, include: :game, status: :ok
     end
 
     def show
@@ -12,7 +17,8 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        review = @current_user.reviews.create!(review_params)
+        game = Game.find(params[:game_id])
+        review = game.reviews.create!(review_params)
         render json: review, status: :created
     end
 
@@ -31,6 +37,6 @@ class ReviewsController < ApplicationController
     private 
 
     def review_params
-        params.permit(:title, :body, :rating)
+        params.permit(:title, :body, :rating, :game_id)
     end
 end

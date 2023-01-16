@@ -1,22 +1,22 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "./context/user";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
-function AddReviewForm() {
+// import { useNavigate } from "react-router-dom";
+
+function AddReviewForm({ addReview }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [rating, setRating] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    addGame({
+    addReview({
       title: title,
       body: body,
       rating: rating,
     });
-    navigate("/games");
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <label>Review Title:</label>

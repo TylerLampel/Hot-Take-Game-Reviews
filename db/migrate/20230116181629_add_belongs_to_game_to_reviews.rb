@@ -1,4 +1,4 @@
-class AddGameIdToReviews < ActiveRecord::Migration[6.1]
+class AddBelongsToGameToReviews < ActiveRecord::Migration[6.1]
   def change
     add_reference :reviews, :game, null: false, foreign_key: true
   end

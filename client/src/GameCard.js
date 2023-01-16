@@ -15,6 +15,7 @@ function GameCard({ game }) {
       }
     });
   }
+
   return (
     <div>
       <h4>{title}</h4>

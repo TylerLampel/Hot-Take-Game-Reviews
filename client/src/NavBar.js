@@ -22,6 +22,9 @@ function Navbar() {
         <h1>Hot Takes Game Reviews</h1>
         <h3>Hello {user.username}</h3>
         <button onClick={logoutUser}>Logout</button>
+        <NavLink to="/">
+          <button>Home</button>
+        </NavLink>
         <NavLink to="/addGame">
           <button>Add A Game</button>
         </NavLink>

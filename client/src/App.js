@@ -19,9 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/games" element={<Games />}>
-            <Route path="/games/:id/reviews" element={<Reviews />} />
-          </Route>
+          <Route path="/games" element={<Games />} />
+          <Route path="/games/:game_id/reviews" element={<Reviews />} />
           <Route path="/addgame" element={<AddAGameForm />} />
         </Routes>
       </UserProvider>

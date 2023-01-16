@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import GameCard from "../GameCard";
 
 // create context
 const UserContext = React.createContext();
@@ -27,10 +28,13 @@ function UserProvider({ children }) {
     fetch("/games")
       .then((res) => res.json())
       .then((data) => {
-        console.log("games", data);
         setGames(data);
       });
   }
+
+  const renderedGameCards = games.map((game) => (
+    <GameCard key={game.id} game={game} />
+  ));
 
   function addGame(game) {
     fetch("/games", {
@@ -43,22 +47,6 @@ function UserProvider({ children }) {
         setGames([...games, data]);
       });
   }
-
-  // add a review through association
-  // use params to add the review to that game
-  //
-
-  // function addReview(review) {
-  //   fetch("/reviews", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(review),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setGames([...games, data]);
-  //     });
-  // }
 
   function deleteGame(id) {
     const updatedGames = games.filter((game) => game.id !== id);
@@ -92,6 +80,7 @@ function UserProvider({ children }) {
         games,
         addGame,
         deleteGame,
+        renderedGameCards,
       }}
     >
       {children}
