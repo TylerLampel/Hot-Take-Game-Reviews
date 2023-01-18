@@ -18,7 +18,7 @@ function AddAGameForm() {
       age_rating: ageRating,
       description: description,
     });
-    navigate("/games");
+    navigate("/");
   }
   return (
     <form onSubmit={handleSubmit}>

@@ -28,19 +28,19 @@ Game.create!([{
 
 User.create!([{
     username: "tyler",
-    password_digest: "123"
+    password: "123"
 },
 {
     username: "bob",
-    password_digest: "bob"
+    password: "bob"
 },
 {
     username: "sue",
-    password_digest: "sue"
+    password: "sue"
 },
 {
     username: "123",
-    password_digest: "123"
+    password: "123"
 }])
 
 

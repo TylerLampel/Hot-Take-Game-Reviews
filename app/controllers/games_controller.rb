@@ -5,17 +5,13 @@ class GamesController < ApplicationController
 
     def index
         games = Game.all
-        render json: games, status: :ok
+        render json: games,include: :reviews, status: :ok
     end
 
     def create
+        @current_user
         game = Game.create!(game_params)
         render json: game, status: :created
-    end
-
-    def show
-        game = Game.find(params[:id])
-        render json: game, include: :reviews, status: :ok
     end
 
     def destroy

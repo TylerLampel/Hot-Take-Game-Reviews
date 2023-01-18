@@ -1,25 +1,22 @@
 class ReviewsController < ApplicationController
-    skip_before_action :authorize
+    skip_before_action :authorize, only: [:index]
     
     def index
+        reviews = Review.all
+        render json: reviews, include: :game, status: :ok
+    end
+
+    # make this return Game.all
+
+    def create
         if params[:game_id]
             game = Game.find(params[:game_id])
+            @current_user.reviews.create!(review_params)
             reviews = game.reviews
         else
             reviews = Review.all
         end
-        render json: reviews, include: :game, status: :ok
-    end
-
-    def show
-        review = @current_user.reviews.find(params[:id])
-        render json: review
-    end
-
-    def create
-        game = Game.find(params[:game_id])
-        review = game.reviews.create!(review_params)
-        render json: review, status: :created
+        render json: reviews, status: :created
     end
 
     def update
@@ -33,10 +30,5 @@ class ReviewsController < ApplicationController
         review.destroy
         head :no_content
     end
-    
-    private 
 
-    def review_params
-        params.permit(:title, :body, :rating, :game_id)
-    end
 end

@@ -78,6 +78,7 @@ function UserProvider({ children }) {
         signup,
         loggedIn,
         games,
+        setGames,
         addGame,
         deleteGame,
         renderedGameCards,

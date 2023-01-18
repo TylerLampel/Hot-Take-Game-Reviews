@@ -15,6 +15,9 @@ function AddReviewForm({ addReview }) {
       body: body,
       rating: rating,
     });
+    setTitle("");
+    setBody("");
+    setRating("");
   }
 
   return (
