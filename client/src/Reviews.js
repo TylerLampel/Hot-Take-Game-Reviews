@@ -1,19 +1,15 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
 import AddReviewForm from "./AddReviewForm";
 import ReviewCard from "./ReviewCard";
 import { UserContext } from "./context/user";
 
-function Reviews() {
-  const { game_id } = useParams();
-  const { games, setGames } = useContext(UserContext);
-  const game = games.find((game) => game.id === parseInt(game_id));
-  const [reviews, setReviews] = useState(game.reviews);
+function Reviews({ gameReviews, game_id }) {
+  const { loggedIn } = useContext(UserContext);
+  const [showForm, setShowForm] = useState(false);
+  const [reviews, setReviews] = useState(gameReviews);
   const reviewCards = reviews.map((review) => (
     <ReviewCard key={review.id} review={review} deleteReview={deleteReview} />
   ));
-
-  console.log(reviews);
 
   function addReview(review) {
     fetch(`/games/${game_id}/reviews`, {
@@ -32,12 +28,25 @@ function Reviews() {
     setReviews(updatedReviews);
   }
 
-  return (
-    <div>
-      <AddReviewForm addReview={addReview} />
-      {reviewCards}
-    </div>
-  );
+  function toggleReviewForm() {
+    setShowForm(!showForm);
+  }
+  if (loggedIn) {
+    return (
+      <div>
+        <button onClick={toggleReviewForm}>Add A Review</button>
+        {showForm && (
+          <AddReviewForm
+            addReview={addReview}
+            toggleReviewForm={toggleReviewForm}
+          />
+        )}
+        {reviewCards}
+      </div>
+    );
+  } else {
+    return <div>{reviewCards}</div>;
+  }
 }
 
 export default Reviews;

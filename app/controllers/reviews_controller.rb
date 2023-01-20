@@ -6,8 +6,6 @@ class ReviewsController < ApplicationController
         render json: reviews, include: :game, status: :ok
     end
 
-    # make this return Game.all
-
     def create
         if params[:game_id]
             game = Game.find(params[:game_id])

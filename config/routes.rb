@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :reviews, except: [:show]
   resources :games, except: [:show] do
-    resources :reviews, only: [:index, :create]
+    resources :reviews, only: [ :create]
   end
 
   post "/login", to: "sessions#create"

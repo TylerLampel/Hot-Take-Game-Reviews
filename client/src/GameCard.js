@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+
 import { UserContext } from "./context/user";
+import Reviews from "./Reviews";
 
 function GameCard({ game }) {
   const { id, title, image_url, age_rating, description } = game;
   const { deleteGame } = useContext(UserContext);
+  const [showReviews, setShowReviews] = useState(false);
 
   function handleDeleteGameClick() {
     fetch(`/games/${id}`, {
@@ -16,14 +18,23 @@ function GameCard({ game }) {
     });
   }
 
+  function toggleReviews() {
+    setShowReviews(!showReviews);
+  }
+
   return (
     <div>
       <h4>{title}</h4>
       <img src={image_url} alt={title} />
       <button onClick={handleDeleteGameClick}> Delete </button>
-      <Link to={`/games/${id}/reviews`}>
-        <button>Reviews</button>
-      </Link>
+      <button onClick={toggleReviews}>
+        {showReviews ? "Hide Reviews" : "Show Reviews"}
+      </button>
+      {showReviews ? (
+        <Reviews gameReviews={game.reviews} game_id={id} />
+      ) : (
+        <></>
+      )}
       <p>Age Rating: {age_rating}</p>
       <p>
         Description:

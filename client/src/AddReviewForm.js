@@ -2,11 +2,10 @@ import React, { useState } from "react";
 
 // import { useNavigate } from "react-router-dom";
 
-function AddReviewForm({ addReview }) {
+function AddReviewForm({ addReview, toggleReviewForm }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [rating, setRating] = useState("");
-  // const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,6 +17,7 @@ function AddReviewForm({ addReview }) {
     setTitle("");
     setBody("");
     setRating("");
+    toggleReviewForm();
   }
 
   return (

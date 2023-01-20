@@ -12,7 +12,7 @@ function Navbar() {
       headers: { "Content-Type": "application/json" },
     }).then(() => {
       logout();
-      navigate("/");
+      navigate("/games");
     });
   }
 
@@ -25,7 +25,13 @@ function Navbar() {
         <NavLink to="/">
           <button>Home</button>
         </NavLink>
-        <NavLink to="/addGame">
+        <NavLink to="/mygames">
+          <button>My Reviewed Games</button>
+        </NavLink>
+        <NavLink to="/games">
+          <button>All Games</button>
+        </NavLink>
+        <NavLink to="/addgame">
           <button>Add A Game</button>
         </NavLink>
         <hr />
@@ -40,6 +46,9 @@ function Navbar() {
         </NavLink>
         <NavLink to="/signup">
           <button>Signup</button>
+        </NavLink>
+        <NavLink to="/games">
+          <button>All Games</button>
         </NavLink>
       </div>
     );
