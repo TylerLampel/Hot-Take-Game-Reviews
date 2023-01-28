@@ -1,21 +1,39 @@
 import React, { useContext } from "react";
 import { UserContext } from "./context/user";
+import GameCard from "./GameCard";
+import { Grid } from "@mui/material";
 
-function Games() {
-  const { user, loggedIn, renderedGameCards } = useContext(UserContext);
+function Games({ games, setGames, deleteGame }) {
+  const { user, loggedIn } = useContext(UserContext);
+
+  const renderedGameCards = games.map((game) => (
+    <Grid item xs={12} md={6} lg={4} key={game.id}>
+      <GameCard
+        key={game.id}
+        game={game}
+        deleteGame={deleteGame}
+        games={games}
+        setGames={setGames}
+      />
+    </Grid>
+  ));
 
   if (loggedIn) {
     return (
       <div>
         <h3>{user.username}'s Home Page</h3>
-        {renderedGameCards}
+        <Grid container spacing={3}>
+          {renderedGameCards}
+        </Grid>
       </div>
     );
   } else {
     return (
       <div>
         <h3>Please Login or Signup</h3>
-        {renderedGameCards}
+        <Grid container spacing={3}>
+          {renderedGameCards}
+        </Grid>
       </div>
     );
   }

@@ -1,13 +1,11 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "./context/user";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AddAGameForm() {
+function AddAGameForm({ addGame }) {
   const [title, setTitle] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [ageRating, setAgeRating] = useState("");
   const [description, setDescription] = useState("");
-  const { addGame } = useContext(UserContext);
   const navigate = useNavigate();
 
   function handleSubmit(e) {

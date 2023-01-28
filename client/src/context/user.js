@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GameCard from "../GameCard";
+import { useNavigate } from "react-router-dom";
 
 // create context
 const UserContext = React.createContext();
@@ -8,14 +8,13 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false); //add loggedIn flag
-  const [games, setGames] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/me")
       .then((res) => res.json())
       .then((data) => {
         setUser(data);
-        fetchGames();
         if (data.errors) {
           setLoggedIn(false);
         } else {
@@ -24,41 +23,13 @@ function UserProvider({ children }) {
       });
   }, []);
 
-  function fetchGames() {
-    fetch("/games")
-      .then((res) => res.json())
-      .then((data) => {
-        setGames(data);
-      });
-  }
-
-  const renderedGameCards = games.map((game) => (
-    <GameCard key={game.id} game={game} />
-  ));
-
-  function addGame(game) {
-    fetch("/games", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(game),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setGames([...games, data]);
-      });
-  }
-
-  function deleteGame(id) {
-    const updatedGames = games.filter((game) => game.id !== id);
-    setGames(updatedGames);
-  }
-
   function login(user) {
     setUser(user);
     setLoggedIn(true); // set loggedIn flag
   }
 
   function logout() {
+    navigate("/");
     setUser({});
     setLoggedIn(false); // set loggedIn flag
   }
@@ -77,11 +48,6 @@ function UserProvider({ children }) {
         logout,
         signup,
         loggedIn,
-        games,
-        setGames,
-        addGame,
-        deleteGame,
-        renderedGameCards,
       }}
     >
       {children}

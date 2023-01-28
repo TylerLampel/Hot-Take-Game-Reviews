@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 
-// import { useNavigate } from "react-router-dom";
-
-function AddReviewForm({ addReview, toggleReviewForm }) {
+function AddReviewForm({ addReview, toggleReviewForm, game_id }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [rating, setRating] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    addReview({
-      title: title,
-      body: body,
-      rating: rating,
-    });
+    const addedReview = { title: title, body: body, rating: rating };
+    fetch(`/games/${game_id}/reviews`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(addedReview),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        addReview(data);
+      });
+
     setTitle("");
     setBody("");
     setRating("");

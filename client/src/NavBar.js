@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "./context/user";
 import { NavLink, useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 function Navbar() {
   const { user, logout, loggedIn } = useContext(UserContext);
@@ -21,18 +22,18 @@ function Navbar() {
       <div>
         <h1>Hot Takes Game Reviews</h1>
         <h3>Hello {user.username}</h3>
-        <button onClick={logoutUser}>Logout</button>
+        <Button onClick={logoutUser}>Logout</Button>
         <NavLink to="/">
-          <button>Home</button>
+          <Button>Home</Button>
         </NavLink>
         <NavLink to="/mygames">
-          <button>My Reviewed Games</button>
+          <Button>My Reviewed Games</Button>
         </NavLink>
         <NavLink to="/games">
-          <button>All Games</button>
+          <Button>All Games</Button>
         </NavLink>
         <NavLink to="/addgame">
-          <button>Add A Game</button>
+          <Button>Add A Game</Button>
         </NavLink>
         <hr />
       </div>
@@ -42,13 +43,13 @@ function Navbar() {
       <div>
         <h1>Hot Takes Game Reviews</h1>
         <NavLink to="/login">
-          <button>Login</button>
+          <Button>Login</Button>
         </NavLink>
         <NavLink to="/signup">
-          <button>Signup</button>
+          <Button>Signup</Button>
         </NavLink>
         <NavLink to="/games">
-          <button>All Games</button>
+          <Button>All Games</Button>
         </NavLink>
       </div>
     );

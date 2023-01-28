@@ -9,12 +9,14 @@ class ReviewsController < ApplicationController
     def create
         if params[:game_id]
             game = Game.find(params[:game_id])
-            @current_user.reviews.create!(review_params)
-            reviews = game.reviews
+            review = @current_user.reviews.create!(review_params)
+            render json: review, status: :created
+
         else
             reviews = Review.all
+            render json: reviews, status: :created
         end
-        render json: reviews, status: :created
+        
     end
 
     def update
