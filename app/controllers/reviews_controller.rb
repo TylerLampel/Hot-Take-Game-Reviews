@@ -1,16 +1,11 @@
 class ReviewsController < ApplicationController
-    skip_before_action :authorize, only: [:index]
     
-    def index
-        reviews = Review.all
-        render json: reviews, include: :game, status: :ok
-    end
 
     def create
         if params[:game_id]
             game = Game.find(params[:game_id])
             review = @current_user.reviews.create!(review_params)
-            render json: review, status: :created
+            render json: review, include: :user, status: :created
 
         else
             reviews = Review.all

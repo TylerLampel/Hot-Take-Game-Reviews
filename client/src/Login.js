@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./context/user";
 import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -56,7 +57,11 @@ function Login() {
         <input type="submit" />
       </form>
       <ul>
-        <h3>{error}</h3>
+        {error && (
+          <Alert severity="error" onClose={() => setError(!error)}>
+            {error}
+          </Alert>
+        )}
       </ul>
     </>
   );

@@ -1,5 +1,5 @@
 class ReviewSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :rating, :game, :user_id
-  has_one :user
+  attributes :id, :title, :body, :rating, :user_id
+  belongs_to :user
   belongs_to :game
 end

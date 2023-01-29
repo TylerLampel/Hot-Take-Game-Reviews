@@ -1,6 +1,6 @@
 class Review < ApplicationRecord
-  belongs_to :user, optional: true
-  belongs_to :game, optional: true
+  belongs_to :user
+  belongs_to :game
 
   validates :title, :body, :rating, presence: true
 end

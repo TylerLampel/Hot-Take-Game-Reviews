@@ -108,3 +108,12 @@ Review.create!([{
     game_id: 3
 }])
 
+
+u = User.first
+u.reviews.create!({
+    title: "yes",
+    body: "I love this game!",
+    rating: 5,
+    game_id: 1
+})
+

@@ -4,8 +4,8 @@ class GamesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def index
-        games = Game.all
-        render json: games,include: :reviews, status: :ok
+        games = Game.all.order("title")
+        render json: games, include: :reviews, status: :ok
     end
 
     def create

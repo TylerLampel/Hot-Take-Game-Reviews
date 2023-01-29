@@ -8,20 +8,35 @@ import CardHeader from "@mui/material/CardHeader";
 function MyGames() {
   const { user, loggedIn } = useContext(UserContext);
 
-  const renderMyGames = user.reviews.map((review) => (
-    <Grid container spacing={3} key={review.id}>
-      <Grid item xs={12} md={6} lg={4}>
-        <Card elevation={3}>
-          <CardHeader title={review.game.title} variant="h2" />
-          <CardMedia
-            component="img"
-            height="250"
-            image={review.game.image_url}
-            alt={review.game.title}
-            sx={{ padding: "1em 1em 1em 1em", objectFit: "contain" }}
-          />
-        </Card>
-      </Grid>
+  //user.games
+
+  // const myGames = [
+  //   ...new Map(
+  //     user.games.map((game) => [game.["id"], game])
+  //   ).values(),
+  // ];
+  // console.log(myGames);
+
+  const myReviewedGames = [...user.games].sort((a, b) =>
+    a.title > b.title ? 1 : -1
+  );
+
+  let uniqueMyGames = [
+    ...new Map(myReviewedGames.map((game) => [game["id"], game])).values(),
+  ];
+
+  const renderMyGames = uniqueMyGames.map((game) => (
+    <Grid item xs={12} md={6} lg={4} key={game.id}>
+      <Card elevation={3}>
+        <CardHeader title={game.title} variant="h2" />
+        <CardMedia
+          component="img"
+          height="250"
+          image={game.image_url}
+          alt={game.title}
+          sx={{ padding: "1em 1em 1em 1em", objectFit: "contain" }}
+        />
+      </Card>
     </Grid>
   ));
 
@@ -29,7 +44,9 @@ function MyGames() {
     return (
       <div>
         <h3>View games you have reviewed below</h3>
-        {renderMyGames}
+        <Grid container spacing={3}>
+          {renderMyGames}
+        </Grid>
       </div>
     );
   } else {

@@ -1,49 +1,76 @@
 import React, { useState, useContext } from "react";
 import EditReviewForm from "./EditReviewForm";
 import { UserContext } from "./context/user";
+import Button from "@mui/material/Button";
+import Rating from "@mui/material/Rating";
 
-function ReviewCard({ review, deleteReview }) {
+function ReviewCard({ review, deleteReview, editReview }) {
   const { user } = useContext(UserContext);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [rev, setRev] = useState(review);
 
   function handleDeleteReviewClick() {
-    if (user.id === rev.user_id) {
-      fetch(`/reviews/${rev.id}`, {
+    if (user.id === review.user_id) {
+      fetch(`/reviews/${review.id}`, {
         method: "DELETE",
       }).then((res) => {
         if (res.ok) {
-          deleteReview(rev.id);
+          deleteReview(review.id);
         }
       });
     }
   }
 
   function toggleEditReviewForm() {
-    if (user.id === rev.user_id) {
+    if (user.id === review.user_id) {
       setShowEditForm(!showEditForm);
     }
   }
-
-  return (
-    <div key={rev.id}>
-      <h3>{rev.title}</h3>
-      {showEditForm ? (
-        <EditReviewForm
-          review={rev}
-          toggleEditReviewForm={toggleEditReviewForm}
-          setRev={setRev}
-        />
-      ) : (
-        <button onClick={toggleEditReviewForm}>Edit</button>
-      )}
-
-      <button onClick={handleDeleteReviewClick}>Delete</button>
-      <br />
-      {rev.body}
-      {rev.rating}
-    </div>
-  );
+  if (user.id === review.user_id) {
+    return (
+      <div key={review.id}>
+        <h3>{review.title}</h3>
+        {showEditForm ? (
+          <EditReviewForm
+            toggleEditReviewForm={toggleEditReviewForm}
+            review={review}
+            editReview={editReview}
+          />
+        ) : (
+          <Button
+            size="small"
+            variant="contained"
+            color="secondary"
+            onClick={toggleEditReviewForm}
+          >
+            Edit
+          </Button>
+        )}
+        <Button
+          size="small"
+          variant="contained"
+          color="secondary"
+          onClick={handleDeleteReviewClick}
+        >
+          Delete
+        </Button>
+        <br />
+        {review.body}
+        <br />
+        <Rating name="read-only" value={review.rating} readOnly />
+      </div>
+    );
+  } else {
+    return (
+      <div key={review.id}>
+        <br />
+        <h3>{review.title}</h3>
+        <br />
+        {review.body}
+        <br />
+        <Rating name="read-only" value={review.rating} readOnly />
+      </div>
+    );
+  }
 }
 
 export default ReviewCard;

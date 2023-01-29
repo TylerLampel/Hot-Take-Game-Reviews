@@ -11,6 +11,7 @@ import Modal from "@mui/material/Modal";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
+import Alert from "@mui/material/Alert";
 
 const style = {
   position: "absolute",
@@ -29,6 +30,7 @@ function GameCard({ game, deleteGame, games, setGames }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleDeleteGameClick() {
     fetch(`/games/${id}`, {
@@ -36,12 +38,19 @@ function GameCard({ game, deleteGame, games, setGames }) {
     }).then((res) => {
       if (res.ok) {
         deleteGame(id);
+      } else {
+        setErrorMessage("Must be logged in to delete games");
       }
     });
   }
 
   return (
     <Card elevation={3}>
+      {errorMessage && (
+        <Alert severity="error" onClose={() => setErrorMessage(!errorMessage)}>
+          {errorMessage}
+        </Alert>
+      )}
       <CardHeader
         title={title}
         variant="h2"
@@ -61,10 +70,10 @@ function GameCard({ game, deleteGame, games, setGames }) {
       <CardContent>
         <Typography paragraph>Age Rating: {age_rating}</Typography>
         <Typography variant="body2" color="text.secondary">
-          {description}
+          Descripiton: {description}
         </Typography>
         <CardActions>
-          <Button onClick={handleOpen}>Open modal</Button>
+          <Button onClick={handleOpen}>Show Reviews</Button>
         </CardActions>
         <Modal
           open={open}

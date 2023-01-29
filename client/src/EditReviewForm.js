@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EditReviewForm({ review, setRev, toggleEditReviewForm }) {
+function EditReviewForm({ review, editReview, toggleEditReviewForm }) {
   const [title, setTitle] = useState(review.title);
   const [body, setBody] = useState(review.body);
   const [rating, setRating] = useState(review.rating);
@@ -20,7 +20,7 @@ function EditReviewForm({ review, setRev, toggleEditReviewForm }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        setRev(data);
+        editReview(data);
         setTitle("");
         setBody("");
         setRating("");
