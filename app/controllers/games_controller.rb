@@ -20,12 +20,6 @@ class GamesController < ApplicationController
         head :no_content
     end
 
-    def update
-        game = Game.find(params[:id])
-        game.update!(game_params)
-        render json: game
-    end
-
     private
 
     def game_params

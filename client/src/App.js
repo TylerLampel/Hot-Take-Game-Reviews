@@ -12,10 +12,12 @@ import { UserProvider } from "./context/user";
 import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import Alert from "@mui/material/Alert";
 
-function App(props) {
+function App() {
   const [games, setGames] = useState([]);
   const navigate = useNavigate();
+  const [errorsList, setErrorsList] = useState([]);
 
   useEffect(() => {
     fetch("/games")
@@ -33,8 +35,15 @@ function App(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        setGames([...games, data]);
-        navigate("/games");
+        if (!data.errors) {
+          setGames([...games, data]);
+          navigate("/games");
+        } else {
+          const errorList = data.errors.map((e) => (
+            <Alert severity="error">{e}</Alert>
+          ));
+          setErrorsList(errorList);
+        }
       });
   }
 
@@ -73,7 +82,7 @@ function App(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <UserProvider>
-        <Container>
+        <Container maxWidth="xl">
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -92,7 +101,9 @@ function App(props) {
             <Route path="/login" element={<Login />} />
             <Route
               path="/addgame"
-              element={<AddAGameForm addGame={addGame} />}
+              element={
+                <AddAGameForm addGame={addGame} errorsList={errorsList} />
+              }
             />
           </Routes>
         </Container>

@@ -2,6 +2,9 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "./context/user";
 import { useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -37,32 +40,41 @@ function Login() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>Username: </label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <br />
-        <label>Password: </label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <input type="submit" />
-      </form>
-      <ul>
-        {error && (
-          <Alert severity="error" onClose={() => setError(!error)}>
-            {error}
-          </Alert>
-        )}
-      </ul>
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <div>
+          <TextField
+            id="username"
+            label="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <br />
+          <TextField
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <Button type="submit">Log In</Button>
+        </div>
+        <ul>
+          {error && (
+            <Alert severity="error" onClose={() => setError(!error)}>
+              {error}
+            </Alert>
+          )}
+        </ul>
+      </Box>
     </>
   );
 }

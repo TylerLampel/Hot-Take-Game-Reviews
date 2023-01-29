@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-    
 
     def create
         if params[:game_id]

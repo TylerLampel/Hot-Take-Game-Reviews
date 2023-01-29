@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :reviews, except: [:show]
-  resources :games, except: [:show] do
+  resources :reviews, except: [:show, :index]
+  resources :games, except: [:show, :update] do
     resources :reviews, only: [ :create]
   end
 

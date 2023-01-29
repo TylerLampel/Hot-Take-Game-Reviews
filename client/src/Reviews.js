@@ -14,6 +14,7 @@ function Reviews({ game_id, games, setGames, game }) {
   useEffect(() => {
     const singleGame = games.find((obj) => obj.id === game.id);
     setCurrentGame(singleGame);
+    // eslint-disable-next-line
   }, [games]);
 
   const reviewCards = currentGame.reviews.map((review) => (

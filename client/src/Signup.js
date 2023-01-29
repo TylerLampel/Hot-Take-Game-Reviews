@@ -1,6 +1,11 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./context/user";
 import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -32,43 +37,52 @@ function Signup() {
           setUsername("");
           setPassword("");
           setPasswordConfirmation("");
-          const errorList = user.errors.map((e) => <li>{e}</li>);
+          const errorList = user.errors.map((e) => (
+            <Alert severity="error">{e}</Alert>
+          ));
           setErrorsList(errorList);
         }
       });
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
+    <Box
+      component="form"
+      sx={{
+        "& .MuiTextField-root": { m: 1, width: "25ch" },
+      }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <div>
+        <TextField
           id="username"
+          label="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <br />
-        <label>Password:</label>
-        <input
+        <TextField
+          id="outlined-password-input"
+          label="Password"
           type="password"
-          id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <label>Confirm Password:</label>
-        <input
+        <TextField
+          id="outlined-password-input"
+          label="Password Confirmation"
           type="password"
-          id="password_confirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
         <br />
-        <input type="submit" />
-      </form>
-      <ul>{errorsList}</ul>
-    </div>
+        <Button type="submit">Sign Up</Button>
+        <Stack>{errorsList}</Stack>
+      </div>
+    </Box>
   );
 }
 

@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Rating from "@mui/material/Rating";
 
 function EditReviewForm({ review, editReview, toggleEditReviewForm }) {
   const [title, setTitle] = useState(review.title);
@@ -30,31 +34,46 @@ function EditReviewForm({ review, editReview, toggleEditReviewForm }) {
 
   return (
     <form onSubmit={handleEditSubmit}>
-      <label>Review Title:</label>
-      <input
-        type="text"
+      <TextField
         id="review_title"
+        label="Review Title"
+        variant="outlined"
+        size="small"
+        type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-      />
+      ></TextField>
       <br />
-      <label>Review Body:</label>
-      <input
-        type="text"
+      <TextField
         id="body"
+        label="Body"
+        variant="outlined"
+        size="small"
+        type="text"
         value={body}
         onChange={(e) => setBody(e.target.value)}
-      />
+      ></TextField>
       <br />
-      <label>Rating:</label>
-      <input
-        type="integer"
-        id="rating"
+      <Typography component="legend">New Rating</Typography>
+      <Rating
+        name="rating"
         value={rating}
-        onChange={(e) => setRating(e.target.value)}
+        onChange={(event, newRating) => {
+          setRating(newRating);
+        }}
       />
       <br />
-      <input type="submit" />
+      <Button type="submit" size="small" variant="contained" color="secondary">
+        Submit
+      </Button>
+      <Button
+        onClick={toggleEditReviewForm}
+        size="small"
+        variant="contained"
+        color="secondary"
+      >
+        Cancel
+      </Button>
     </form>
   );
 }

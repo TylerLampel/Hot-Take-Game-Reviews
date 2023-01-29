@@ -4,7 +4,7 @@ import GameCard from "./GameCard";
 import { Grid } from "@mui/material";
 
 function Games({ games, setGames, deleteGame }) {
-  const { user, loggedIn } = useContext(UserContext);
+  const { loggedIn } = useContext(UserContext);
 
   const renderedGameCards = games.map((game) => (
     <Grid item xs={12} md={6} lg={4} key={game.id}>
@@ -21,7 +21,7 @@ function Games({ games, setGames, deleteGame }) {
   if (loggedIn) {
     return (
       <div>
-        <h3>{user.username}'s Home Page</h3>
+        <br />
         <Grid container spacing={3}>
           {renderedGameCards}
         </Grid>

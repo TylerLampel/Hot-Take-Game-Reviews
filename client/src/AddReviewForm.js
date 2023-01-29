@@ -55,22 +55,6 @@ function AddReviewForm({ addReview, toggleReviewForm, game_id }) {
           onChange={(e) => setBody(e.target.value)}
         ></TextField>
         <br />
-        {/* <TextField
-          id="outlined-number"
-          label="Rating"
-          type="number"
-          size="small"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        >
-          <input
-            type="integer"
-            id="rating"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-          />
-        </TextField> */}
         <Typography component="legend">Rating</Typography>
         <Rating
           name="rating"

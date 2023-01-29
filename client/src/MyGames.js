@@ -8,15 +8,6 @@ import CardHeader from "@mui/material/CardHeader";
 function MyGames() {
   const { user, loggedIn } = useContext(UserContext);
 
-  //user.games
-
-  // const myGames = [
-  //   ...new Map(
-  //     user.games.map((game) => [game.["id"], game])
-  //   ).values(),
-  // ];
-  // console.log(myGames);
-
   const myReviewedGames = [...user.games].sort((a, b) =>
     a.title > b.title ? 1 : -1
   );
@@ -43,7 +34,7 @@ function MyGames() {
   if (loggedIn) {
     return (
       <div>
-        <h3>View games you have reviewed below</h3>
+        <h3>{user.username}'s Reviewed Games</h3>
         <Grid container spacing={3}>
           {renderMyGames}
         </Grid>
