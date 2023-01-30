@@ -5,8 +5,18 @@ import { Card } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 
-function MyGames() {
+function MyGames({ games }) {
   const { user, loggedIn } = useContext(UserContext);
+  const myGames = games.map((game) => {
+    return game.reviews.map((review) => {
+      if (review.user_id === user.id) {
+        return game;
+      } else {
+        return null;
+      }
+    });
+  });
+  console.log(myGames);
 
   const myReviewedGames = [...user.games].sort((a, b) =>
     a.title > b.title ? 1 : -1

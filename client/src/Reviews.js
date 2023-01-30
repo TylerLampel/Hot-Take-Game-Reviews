@@ -7,7 +7,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
 function Reviews({ game_id, games, setGames, game }) {
-  const { loggedIn } = useContext(UserContext);
+  const { loggedIn, user, setUser } = useContext(UserContext);
   const [showForm, setShowForm] = useState(false);
   const [currentGame, setCurrentGame] = useState({ reviews: [] });
 
@@ -16,6 +16,9 @@ function Reviews({ game_id, games, setGames, game }) {
     setCurrentGame(singleGame);
     // eslint-disable-next-line
   }, [games]);
+
+  console.log("user.games", user.games);
+  console.log("user reviews", user.reviews);
 
   const reviewCards = currentGame.reviews.map((review) => (
     <Paper elevation={3} key={review.id}>
@@ -34,6 +37,11 @@ function Reviews({ game_id, games, setGames, game }) {
     };
     const filteredGames = games.filter((g) => g.id !== game.id);
     const newGames = [...filteredGames, updatedReviews];
+    const updatedUser = {
+      ...user,
+      games: [...user.games.filter((game) => game.id !== currentGame.id)],
+    };
+    setUser(updatedUser);
     setCurrentGame(updatedReviews);
     setGames(newGames);
   }
@@ -49,6 +57,11 @@ function Reviews({ game_id, games, setGames, game }) {
     };
     const filteredGames = games.filter((g) => g.id !== game.id);
     const newGames = [...filteredGames, updatedReviews];
+    const updatedUser = {
+      ...user,
+      games: [...user.games, currentGame],
+    };
+    setUser(updatedUser);
     setCurrentGame(updatedReviews);
     setGames(newGames);
   }

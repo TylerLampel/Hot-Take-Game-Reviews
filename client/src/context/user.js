@@ -44,6 +44,7 @@ function UserProvider({ children }) {
     <UserContext.Provider
       value={{
         user,
+        setUser,
         login,
         logout,
         signup,

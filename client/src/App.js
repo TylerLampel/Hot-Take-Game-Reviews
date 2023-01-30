@@ -96,7 +96,10 @@ function App() {
                 />
               }
             />
-            <Route path="/mygames" element={<MyGames games={games} />} />
+            <Route
+              path="/mygames"
+              element={<MyGames games={games} setGames={setGames} />}
+            />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route

@@ -26,21 +26,6 @@ function AddAGameForm({ addGame, errorsList }) {
     navigate("/");
   }
   return (
-    //   <label>Age Rating:</label>
-    //   <input
-    //     type="text"
-    //     id="age_rating"
-    //     value={ageRating}
-    //     onChange={(e) => setAgeRating(e.target.value)}
-    //   />
-
-    //   <input
-    //     type="text"
-    //     id="description"
-    //     value={description}
-    //     onChange={(e) => setDescription(e.target.value)}
-    //   />
-    //   <br />
     <Box
       component="form"
       sx={{
