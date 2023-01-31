@@ -17,9 +17,6 @@ function Reviews({ game_id, games, setGames, game }) {
     // eslint-disable-next-line
   }, [games]);
 
-  console.log("user.games", user.games);
-  console.log("user reviews", user.reviews);
-
   const reviewCards = currentGame.reviews.map((review) => (
     <Paper elevation={3} key={review.id}>
       <ReviewCard
